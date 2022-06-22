@@ -16,10 +16,12 @@
       <ColumnDefinition Width="*"/>
     </Grid.ColumnDefinitions>
     <Grid Grid.Column="0">
-      <Frame Source="MenuView.xaml"/>
+      <Frame Source="MenuView.xaml"
+             NavigationUIVisibility="Hidden"/>
     </Grid>
     <Grid Grid.Column="1">
-      <Frame Source="StartView.xaml"/>
+      <Frame Source="{Binding CurrentView}"
+             NavigationUIVisibility="Hidden"/>
     </Grid>
   </Grid>
 </Window>

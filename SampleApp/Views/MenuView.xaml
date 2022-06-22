@@ -20,14 +20,22 @@
     <StackPanel Grid.Row="0"
                 Orientation="Vertical">
       <Button Content="&#xE700;"
-              Style="{StaticResource Menu}"/>
-      <Button Content="Account"/>
-      <Button Content="Group"/>
+              Style="{StaticResource Menu}"
+              Command="{Binding RequestPageCommand}"
+              CommandParameter="StartView.xaml"/>
+      <Button Content="Account"
+              Command="{Binding RequestPageCommand}"
+              CommandParameter="AccountView.xaml"/>
+      <Button Content="Group"
+              Command="{Binding RequestPageCommand}"
+              CommandParameter="GroupView.xaml"/>
     </StackPanel>
     <StackPanel Grid.Row="2"
                 Orientation="Vertical">
       <Button Content="&#xE713;"
-              Style="{StaticResource Menu}"/>
+              Style="{StaticResource Menu}"
+              Command="{Binding RequestPageCommand}"
+              CommandParameter="SettingView.xaml"/>
     </StackPanel>
   </Grid>
 </Page>
