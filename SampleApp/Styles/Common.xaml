@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:core="clr-namespace:System;assembly=netstandard">
+  <Color x:Key="BaseBackColor">#282C34</Color>
+  <Color x:Key="BaseForeColor">#808080</Color>
+
+  <core:Double x:Key="BaseUnit">45</core:Double>
+  <core:Double x:Key="MenuUnit">24</core:Double>
+
+  <SolidColorBrush x:Key="BaseBackBrush" Color="{StaticResource BaseBackColor}"/>
+  <SolidColorBrush x:Key="BaseForeBrush" Color="{StaticResource BaseForeColor}"/>
+
+  <Style TargetType="Grid">
+    <Setter Property="Background" Value="{StaticResource BaseBackBrush}"/>
+    <Setter Property="TextElement.Foreground" Value="{StaticResource BaseForeBrush}"/>
+  </Style>
+  <Style TargetType="{x:Type Button}">
+    <Setter Property="Height" Value="{StaticResource BaseUnit}"/>
+    <Setter Property="Width" Value="{StaticResource BaseUnit}"/>
+  </Style>
+  <Style x:Key="Menu" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+    <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Foreground" Value="{StaticResource BaseForeBrush}"/>
+    <Setter Property="FontSize" Value="{StaticResource MenuUnit}"/>
+  </Style>
+</ResourceDictionary>
