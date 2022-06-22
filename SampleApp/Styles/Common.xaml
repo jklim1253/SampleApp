@@ -4,8 +4,8 @@
   <Color x:Key="BaseBackColor">#282C34</Color>
   <Color x:Key="BaseForeColor">#808080</Color>
 
-  <core:Double x:Key="BaseUnit">45</core:Double>
-  <core:Double x:Key="MenuUnit">24</core:Double>
+  <core:Double x:Key="BaseUnit">40</core:Double>
+  <core:Double x:Key="MenuUnit">20</core:Double>
 
   <SolidColorBrush x:Key="BaseBackBrush" Color="{StaticResource BaseBackColor}"/>
   <SolidColorBrush x:Key="BaseForeBrush" Color="{StaticResource BaseForeColor}"/>

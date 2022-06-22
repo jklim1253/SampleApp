@@ -1,4 +1,7 @@
-﻿using SampleApp.Views;
+﻿using Microsoft.Toolkit.Mvvm.Messaging;
+using SampleApp.Messages;
+using SampleApp.ViewModels;
+using SampleApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

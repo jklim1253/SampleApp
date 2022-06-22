@@ -5,23 +5,63 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SampleApp.Views"
         xmlns:viewmodels="clr-namespace:SampleApp.ViewModels"
+        xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
+        ResizeMode="CanResizeWithGrip"
+        WindowStyle="None"
+        AllowsTransparency="True"
         Title="MainWindow" Height="450" Width="800">
   <Window.DataContext>
     <viewmodels:MainViewModel/>
   </Window.DataContext>
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto"/>
-      <ColumnDefinition Width="*"/>
-    </Grid.ColumnDefinitions>
-    <Grid Grid.Column="0">
-      <Frame Source="MenuView.xaml"
+  <Border BorderThickness="1" BorderBrush="Red">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0"
+                    Orientation="Horizontal">
+          <TextBlock Text="{Binding Title}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1"
+                    Orientation="Horizontal">
+          <StackPanel.Triggers>
+            <EventTrigger RoutedEvent="DragOver" >
+            </EventTrigger>
+          </StackPanel.Triggers>
+        </StackPanel>
+        <StackPanel Grid.Column="2"
+                    Orientation="Horizontal">
+          <Button Content="&#xE921;"
+                  Style="{StaticResource Menu}"
+                  Command="{Binding MinimizeAppCommand}"/>
+          <Button Content="&#xEF2E;"
+                  Style="{StaticResource Menu}"
+                  Command="{Binding MaximizeAppCommand}"/>
+          <Button Content="&#xEF2C;"
+                  Style="{StaticResource Menu}"
+                  Command="{Binding CloseAppCommand}"/>
+        </StackPanel>
+      </Grid>
+      <Grid Grid.Column="0" Grid.Row="1">
+        <Frame Source="MenuView.xaml"
              NavigationUIVisibility="Hidden"/>
-    </Grid>
-    <Grid Grid.Column="1">
-      <Frame Source="{Binding CurrentView}"
+      </Grid>
+      <Grid Grid.Column="1" Grid.Row="1">
+        <Frame Source="{Binding CurrentView}"
              NavigationUIVisibility="Hidden"/>
+      </Grid>
     </Grid>
-  </Grid>
+  </Border>
 </Window>
