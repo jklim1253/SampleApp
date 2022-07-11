@@ -7,7 +7,6 @@
         xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         WindowStyle="None"
-        Topmost="True"
         Title="MainWindow" Height="450" Width="500">
   <WindowChrome.WindowChrome>
     <WindowChrome CaptionHeight="{StaticResource BaseUnit}"/>
@@ -27,7 +26,7 @@
         </Style.Triggers>
       </Style>
     </Border.Style>
-    <Grid>
+    <Grid Style="{StaticResource BaseView}">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="*"/>

@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SampleApp.ViewModels;
 using SampleApp.Views;
+using SampleModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +31,11 @@ namespace SampleApp.Extensions
         services.AddTransient<AccountView>();
         services.AddTransient<GroupView>();
         services.AddTransient<SettingView>();
+
+        services.AddDbContext<SampleContext>(options =>
+        {
+          options.UseSqlite("Data Source=Sample.db");
+        }, ServiceLifetime.Transient);
       });
     }
   }

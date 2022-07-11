@@ -4,15 +4,66 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SampleApp.Views"
+      xmlns:entity="clr-namespace:SampleModel.Entity;assembly=SampleModel"
+      xmlns:dto="clr-namespace:SampleModel.DTO;assembly=SampleModel"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="500"
       Title="AccountView">
   <Grid Style="{StaticResource MainView}">
-    <StackPanel Orientation="Vertical"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-      <TextBlock Text="AccountView"/>
-      <TextBlock Text="{Binding Title}"/>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <StackPanel Grid.Row="0"
+                Orientation="Vertical">
+      <TextBox Text="{Binding User.UserId}" IsReadOnly="True"/>
+      <TextBox Text="{Binding User.UserName}"/>
+      <TextBox Text="{Binding User.Password}"/>
+      <ComboBox ItemsSource="{Binding Groups}"
+                SelectedItem="{Binding User.Group}">
+        <ComboBox.ItemTemplate>
+          <DataTemplate DataType="{x:Type dto:GroupInfoDTO}">
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="{Binding GroupId}"/>
+              <TextBlock Text=" - "/>
+              <TextBlock Text="{Binding GroupName}"/>
+            </StackPanel>
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Column="0"
+                Content="Select"
+                Command="{Binding SelectCommand}"/>
+        <Button Grid.Column="1"
+                Content="Save"
+                Command="{Binding SaveCommand}"/>
+        <Button Grid.Column="2"
+                Content="Delete"
+                Command="{Binding DeleteCommand}"/>
+      </Grid>
     </StackPanel>
+    <Grid Grid.Row="1">
+      <ListView ItemsSource="{Binding Users}"
+                SelectedItem="{Binding User}">
+        <ListView.View>
+          <GridView>
+            <GridViewColumn Header="UserId"
+                            DisplayMemberBinding="{Binding UserId}"/>
+            <GridViewColumn Header="UserName"
+                            DisplayMemberBinding="{Binding UserName}"/>
+            <GridViewColumn Header="Password"
+                            DisplayMemberBinding="{Binding Password}"/>
+            <GridViewColumn Header="Group"
+                            DisplayMemberBinding="{Binding Group.GroupName}"/>
+          </GridView>
+        </ListView.View>
+      </ListView>
+    </Grid>
   </Grid>
 </Page>

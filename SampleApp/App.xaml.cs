@@ -5,6 +5,7 @@ using SampleApp.Extensions;
 using SampleApp.Messages;
 using SampleApp.ViewModels;
 using SampleApp.Views;
+using SampleModel.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -25,6 +26,7 @@ namespace SampleApp
     public App()
     {
       host = Host.CreateDefaultBuilder()
+                 .ConfigureSampleModel()
                  .ConfigureSampleApp()
                  .Build();
 
