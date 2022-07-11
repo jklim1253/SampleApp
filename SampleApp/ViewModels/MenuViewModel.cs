@@ -11,7 +11,24 @@ namespace SampleApp.ViewModels
 {
   public class MenuViewModel : ViewModelBase
   {
+    #region Properties
+
+    private string currentMenu = "HomeView";
+
+    public string CurrentMenu
+    {
+      get => currentMenu;
+      set => SetProperty(ref currentMenu, value);
+    }
+
+    #endregion
+
+    #region Commands
+
     public IRelayCommand<string> RequestPageCommand { get; }
+
+    #endregion
+
     public MenuViewModel()
     {
       Title = "ViewModel-Menu";
@@ -23,7 +40,8 @@ namespace SampleApp.ViewModels
       if (page == null)
         return;
 
-      WeakReferenceMessenger.Default.Send(new RequestPageMessage(page));
+      CurrentMenu = page.Split('.')[0];
+      WeakReferenceMessenger.Default.Send(new NavigateMessage(page));
     }
   }
 }

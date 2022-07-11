@@ -3,26 +3,71 @@
                     xmlns:core="clr-namespace:System;assembly=netstandard">
   <Color x:Key="BaseBackColor">#282C34</Color>
   <Color x:Key="BaseForeColor">#808080</Color>
+  <Color x:Key="HighBackColor">#55555555</Color>
+  <Color x:Key="HighForeColor">Orange</Color>
 
   <core:Double x:Key="BaseUnit">40</core:Double>
   <core:Double x:Key="MenuUnit">20</core:Double>
+  <core:Double x:Key="SystemUnit">10</core:Double>
 
   <SolidColorBrush x:Key="BaseBackBrush" Color="{StaticResource BaseBackColor}"/>
   <SolidColorBrush x:Key="BaseForeBrush" Color="{StaticResource BaseForeColor}"/>
+  <SolidColorBrush x:Key="HighBackBrush" Color="{StaticResource HighBackColor}"/>
+  <SolidColorBrush x:Key="HighForeBrush" Color="{StaticResource HighForeColor}"/>
 
   <Style TargetType="Grid">
     <Setter Property="Background" Value="{StaticResource BaseBackBrush}"/>
     <Setter Property="TextElement.Foreground" Value="{StaticResource BaseForeBrush}"/>
   </Style>
+
+  <Style x:Key="MainView" TargetType="Grid">
+    <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+    <Setter Property="TextElement.Foreground" Value="{StaticResource BaseForeBrush}"/>
+  </Style>
+  
   <Style TargetType="{x:Type Button}">
     <Setter Property="Height" Value="{StaticResource BaseUnit}"/>
     <Setter Property="Width" Value="{StaticResource BaseUnit}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Background="{TemplateBinding Background}"
+                Height="{TemplateBinding Height}"
+                Width="{TemplateBinding Width}">
+            <TextBlock Text="{TemplateBinding Content}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontFamily="{TemplateBinding FontFamily}"
+                       FontSize="{TemplateBinding FontSize}"
+                       Foreground="{TemplateBinding Foreground}"
+                       RenderOptions.ClearTypeHint="Auto"
+                       TextOptions.TextRenderingMode="Aliased"
+                       TextOptions.TextFormattingMode="{TemplateBinding TextOptions.TextFormattingMode}"/>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+              <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
   </Style>
-  <Style x:Key="Menu" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+  <Style x:Key="SystemButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+    <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Foreground" Value="{StaticResource BaseForeBrush}"/>
+    <Setter Property="FontSize" Value="{StaticResource SystemUnit}"/>
+    <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+  </Style>
+  <Style x:Key="MenuButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
     <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="Foreground" Value="{StaticResource BaseForeBrush}"/>
     <Setter Property="FontSize" Value="{StaticResource MenuUnit}"/>
+    <Setter Property="TextOptions.TextFormattingMode" Value="Ideal"/>
   </Style>
 </ResourceDictionary>

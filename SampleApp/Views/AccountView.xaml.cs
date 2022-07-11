@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using SampleApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,7 @@ namespace SampleApp.Views
     public AccountView()
     {
       InitializeComponent();
+      this.DataContext = Ioc.Default.GetRequiredService<AccountViewModel>();
     }
   }
 }

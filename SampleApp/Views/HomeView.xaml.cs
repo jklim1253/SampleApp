@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using SampleApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +20,12 @@ namespace SampleApp.Views
   /// <summary>
   /// Interaction logic for StartView.xaml
   /// </summary>
-  public partial class StartView : Page
+  public partial class HomeView : Page
   {
-    public StartView()
+    public HomeView()
     {
       InitializeComponent();
+      this.DataContext = Ioc.Default.GetRequiredService<HomeViewModel>();
     }
   }
 }

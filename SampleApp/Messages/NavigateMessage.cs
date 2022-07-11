@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SampleApp.Messages
 {
-  public class RequestPageMessage : ValueChangedMessage<string>
+  public class NavigateMessage : ValueChangedMessage<string>
   {
-    public RequestPageMessage(string value) : base(value)
+    public NavigateMessage(string value) : base(value)
     {
     }
   }

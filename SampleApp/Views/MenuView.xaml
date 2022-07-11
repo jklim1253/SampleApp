@@ -4,13 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SampleApp.Views"
-      xmlns:viewmodels="clr-namespace:SampleApp.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MenuView">
-  <Page.DataContext>
-    <viewmodels:MenuViewModel/>
-  </Page.DataContext>
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
@@ -20,22 +16,64 @@
     <StackPanel Grid.Row="0"
                 Orientation="Vertical">
       <Button Content="&#xE700;"
-              Style="{StaticResource Menu}"
               Command="{Binding RequestPageCommand}"
-              CommandParameter="StartView.xaml"/>
-      <Button Content="Account"
+              CommandParameter="HomeView.xaml">
+        <Button.Style>
+          <Style TargetType="Button" BasedOn="{StaticResource MenuButton}">
+            <Style.Triggers>
+              <DataTrigger Binding="{Binding CurrentMenu}" Value="HomeView">
+                <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </Button.Style>
+      </Button>
+      <Button Content="&#xE77B;"
               Command="{Binding RequestPageCommand}"
-              CommandParameter="AccountView.xaml"/>
-      <Button Content="Group"
+              CommandParameter="AccountView.xaml">
+        <Button.Style>
+          <Style TargetType="Button" BasedOn="{StaticResource MenuButton}">
+            <Style.Triggers>
+              <DataTrigger Binding="{Binding CurrentMenu}" Value="AccountView">
+                <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </Button.Style>
+      </Button>
+      <Button Content="&#xE716;"
               Command="{Binding RequestPageCommand}"
-              CommandParameter="GroupView.xaml"/>
+              CommandParameter="GroupView.xaml">
+        <Button.Style>
+          <Style TargetType="Button" BasedOn="{StaticResource MenuButton}">
+            <Style.Triggers>
+              <DataTrigger Binding="{Binding CurrentMenu}" Value="GroupView">
+                <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </Button.Style>
+      </Button>
     </StackPanel>
     <StackPanel Grid.Row="2"
                 Orientation="Vertical">
       <Button Content="&#xE713;"
-              Style="{StaticResource Menu}"
               Command="{Binding RequestPageCommand}"
-              CommandParameter="SettingView.xaml"/>
+              CommandParameter="SettingView.xaml">
+        <Button.Style>
+          <Style TargetType="Button" BasedOn="{StaticResource MenuButton}">
+            <Style.Triggers>
+              <DataTrigger Binding="{Binding CurrentMenu}" Value="SettingView">
+                <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </Button.Style>
+      </Button>
     </StackPanel>
   </Grid>
 </Page>

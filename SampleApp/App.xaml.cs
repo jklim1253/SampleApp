@@ -1,4 +1,7 @@
-﻿using Microsoft.Toolkit.Mvvm.Messaging;
+﻿using Microsoft.Extensions.Hosting;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.Messaging;
+using SampleApp.Extensions;
 using SampleApp.Messages;
 using SampleApp.ViewModels;
 using SampleApp.Views;
@@ -17,12 +20,33 @@ namespace SampleApp
   /// </summary>
   public partial class App : Application
   {
+    private readonly IHost host = null!;
+
+    public App()
+    {
+      host = Host.CreateDefaultBuilder()
+                 .ConfigureSampleApp()
+                 .Build();
+
+      Ioc.Default.ConfigureServices(host.Services);
+
+      host.RunAsync();
+    }
     protected override void OnStartup(StartupEventArgs e)
     {
       base.OnStartup(e);
 
-      MainWindow = new MainWindow();
+      host.StartAsync();
+
+      MainWindow = Ioc.Default.GetRequiredService<MainWindow>();
       MainWindow.Show();
+    }
+
+    protected override void OnExit(ExitEventArgs e)
+    {
+      host.StopAsync();
+
+      base.OnExit(e);
     }
   }
 }

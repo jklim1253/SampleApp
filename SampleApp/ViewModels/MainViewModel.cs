@@ -11,7 +11,7 @@ namespace SampleApp.ViewModels
 {
   public class MainViewModel : ViewModelBase
   {
-    private string currentView = "StartView.xaml";
+    private string currentView = "HomeView.xaml";
 
     public string CurrentView
     {
@@ -31,7 +31,7 @@ namespace SampleApp.ViewModels
       MaximizeAppCommand = new RelayCommand(OnMaximizeApp);
       CloseAppCommand = new RelayCommand(OnCloseApp);
 
-      WeakReferenceMessenger.Default.Register<MainViewModel, RequestPageMessage>(this, OnRequestPage);
+      WeakReferenceMessenger.Default.Register<MainViewModel, NavigateMessage>(this, OnRequestPage);
     }
 
     private void OnMinimizeApp()
@@ -49,10 +49,10 @@ namespace SampleApp.ViewModels
 
     private void OnCloseApp()
     {
-      App.Current.Shutdown();
+      App.Current.MainWindow.Close();
     }
 
-    private void OnRequestPage(MainViewModel recipient, RequestPageMessage message)
+    private void OnRequestPage(MainViewModel recipient, NavigateMessage message)
     {
       recipient.CurrentView = message.Value;
     }

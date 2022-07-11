@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SampleApp.ViewModels
 {
-  public class StartViewModel : ViewModelBase
+  public class HomeViewModel : ViewModelBase
   {
-    public StartViewModel()
+    public HomeViewModel()
     {
-      Title = "ViewModel-Start";
+      Title = "ViewModel-Home";
     }
   }
 }
