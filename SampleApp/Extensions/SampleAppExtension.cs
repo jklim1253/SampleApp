@@ -23,6 +23,7 @@ namespace SampleApp.Extensions
         services.AddSingleton<HomeViewModel>();
         services.AddSingleton<AccountViewModel>();
         services.AddSingleton<GroupViewModel>();
+        services.AddSingleton<ViewViewModel>();
         services.AddSingleton<SettingViewModel>();
 
         services.AddTransient<MainWindow>();
@@ -30,6 +31,7 @@ namespace SampleApp.Extensions
         services.AddTransient<HomeView>();
         services.AddTransient<AccountView>();
         services.AddTransient<GroupView>();
+        services.AddTransient<ViewView>();
         services.AddTransient<SettingView>();
 
         services.AddDbContext<SampleContext>(options =>

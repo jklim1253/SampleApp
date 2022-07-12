@@ -7,6 +7,7 @@
         xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         WindowStyle="None"
+        Topmost="True"
         Title="MainWindow" Height="450" Width="500">
   <WindowChrome.WindowChrome>
     <WindowChrome CaptionHeight="{StaticResource BaseUnit}"/>
@@ -35,6 +36,13 @@
         <StackPanel Grid.Column="0"
                     Orientation="Horizontal"
                     HorizontalAlignment="Left">
+          <TextBlock Text="&#xE7BE;"
+                     FontFamily="Segoe MDL2 Assets"
+                     FontSize="20"
+                     Foreground="Aqua"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Margin="10 0 10 0"/>
           <TextBlock Text="{Binding Title}"
                      VerticalAlignment="Center"
                      Margin="10 0 10 0"/>

@@ -16,6 +16,7 @@
     <StackPanel Grid.Row="0"
                 Orientation="Vertical">
       <Button Content="&#xE700;"
+              ToolTip="Home"
               Command="{Binding RequestPageCommand}"
               CommandParameter="HomeView.xaml">
         <Button.Style>
@@ -24,12 +25,14 @@
               <DataTrigger Binding="{Binding CurrentMenu}" Value="HomeView">
                 <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
                 <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource HighBackBrush}"/>
               </DataTrigger>
             </Style.Triggers>
           </Style>
         </Button.Style>
       </Button>
       <Button Content="&#xE77B;"
+              ToolTip="Account"
               Command="{Binding RequestPageCommand}"
               CommandParameter="AccountView.xaml">
         <Button.Style>
@@ -38,12 +41,14 @@
               <DataTrigger Binding="{Binding CurrentMenu}" Value="AccountView">
                 <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
                 <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource HighBackBrush}"/>
               </DataTrigger>
             </Style.Triggers>
           </Style>
         </Button.Style>
       </Button>
       <Button Content="&#xE716;"
+              ToolTip="Group"
               Command="{Binding RequestPageCommand}"
               CommandParameter="GroupView.xaml">
         <Button.Style>
@@ -52,6 +57,23 @@
               <DataTrigger Binding="{Binding CurrentMenu}" Value="GroupView">
                 <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
                 <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource HighBackBrush}"/>
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </Button.Style>
+      </Button>
+      <Button Content="&#xE736;"
+              ToolTip="View"
+              Command="{Binding RequestPageCommand}"
+              CommandParameter="ViewView.xaml">
+        <Button.Style>
+          <Style TargetType="Button" BasedOn="{StaticResource MenuButton}">
+            <Style.Triggers>
+              <DataTrigger Binding="{Binding CurrentMenu}" Value="ViewView">
+                <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource HighBackBrush}"/>
               </DataTrigger>
             </Style.Triggers>
           </Style>
@@ -61,6 +83,7 @@
     <StackPanel Grid.Row="2"
                 Orientation="Vertical">
       <Button Content="&#xE713;"
+              ToolTip="Setting"
               Command="{Binding RequestPageCommand}"
               CommandParameter="SettingView.xaml">
         <Button.Style>
@@ -69,6 +92,7 @@
               <DataTrigger Binding="{Binding CurrentMenu}" Value="SettingView">
                 <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
                 <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource HighBackBrush}"/>
               </DataTrigger>
             </Style.Triggers>
           </Style>

@@ -10,7 +10,7 @@ namespace SampleApp.ViewModels
   public class TestData
   {
     public int Id { get; set; }
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     public override bool Equals(object? obj)
     {
@@ -25,7 +25,7 @@ namespace SampleApp.ViewModels
 
   public class SettingViewModel : ViewModelBase
   {
-    private TestData selected;
+    private TestData selected = null!;
 
     public TestData Selected
     {
@@ -33,7 +33,7 @@ namespace SampleApp.ViewModels
       set => SetProperty(ref selected, value);
     }
 
-    private IList<TestData> depot;
+    private IList<TestData> depot = null!;
 
     public IList<TestData> Depot
     {

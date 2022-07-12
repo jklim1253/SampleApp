@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.Messaging;
 using SampleApp.Extensions;
 using SampleApp.Messages;
 using SampleApp.ViewModels;
 using SampleApp.Views;
+using SampleModel;
 using SampleModel.Extensions;
 using System;
 using System.Collections.Generic;
@@ -31,6 +33,12 @@ namespace SampleApp
                  .Build();
 
       Ioc.Default.ConfigureServices(host.Services);
+
+      // runtime migration. make local database file
+      //using (var context = Ioc.Default.GetRequiredService<SampleContext>())
+      //{
+      //  context.Database.Migrate();
+      //}
 
       host.RunAsync();
     }

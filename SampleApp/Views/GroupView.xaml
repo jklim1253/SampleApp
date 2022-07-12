@@ -4,7 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SampleApp.Views"
+      xmlns:dto="clr-namespace:SampleModel.DTO;assembly=SampleModel"
       mc:Ignorable="d" 
+      Style="{StaticResource MainPage}"
       d:DesignHeight="450" d:DesignWidth="500"
       Title="GroupView">
   <Grid Style="{StaticResource MainView}">
@@ -36,12 +38,60 @@
     <Grid Grid.Row="1">
       <ListView ItemsSource="{Binding Groups}"
                 SelectedItem="{Binding Group}">
-        <ListView.View>
-          <GridView>
-            <GridViewColumn Header="GroupId" DisplayMemberBinding="{Binding GroupId}"/>
-            <GridViewColumn Header="GroupName" DisplayMemberBinding="{Binding GroupName}"/>
-          </GridView>
-        </ListView.View>
+        <ListView.ItemTemplate>
+          <DataTemplate DataType="{x:Type dto:GroupInfoDTO}">
+            <Expander ExpandDirection="Down" IsExpanded="True">
+              <Expander.Header>
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="{Binding GroupId}"/>
+                  <TextBlock Text=" - "/>
+                  <TextBlock Text="{Binding GroupName}"/>
+                </StackPanel>
+              </Expander.Header>
+              <ItemsControl ItemsSource="{Binding Views}">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <StackPanel/>
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate DataType="{x:Type dto:ViewInfoDTO}">
+                    <Border Padding="5">
+                      <Grid>
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="*"/>
+                          <ColumnDefinition Width="*"/>
+                          <ColumnDefinition Width="*"/>
+                          <ColumnDefinition Width="*"/>
+                          <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"
+                                   Text="{Binding ViewName}"/>
+                        <CheckBox Grid.Column="1"
+                                  Content="CanRead"
+                                  IsChecked="{Binding CanRead}"/>
+                        <CheckBox Grid.Column="2"
+                                  Content="CanInsert"
+                                  IsChecked="{Binding CanInsert}"/>
+                        <CheckBox Grid.Column="3"
+                                  Content="CanUpdate"
+                                  IsChecked="{Binding CanUpdate}"/>
+                        <CheckBox Grid.Column="4"
+                                  Content="CanDelete"
+                                  IsChecked="{Binding CanDelete}"/>
+                      </Grid>
+                    </Border>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </Expander>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.ItemContainerStyle>
+          <Style TargetType="{x:Type ListViewItem}">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+          </Style>
+        </ListView.ItemContainerStyle>
       </ListView>
     </Grid>
   </Grid>

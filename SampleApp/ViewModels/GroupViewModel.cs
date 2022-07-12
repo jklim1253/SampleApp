@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.Input;
+using SampleModel.DTO;
 using SampleModel.Entity;
 using SampleModel.Services;
 using System;
@@ -16,23 +17,23 @@ namespace SampleApp.ViewModels
     #region Fields
 
     private readonly ILogger<GroupViewModel> logger;
-    private readonly DatabaseService dbService;
+    private readonly SampleDataService dbService;
 
     #endregion
 
     #region Properties
 
-    private GroupInfo group = new GroupInfo();
+    private GroupInfoDTO group = null!;
 
-    public GroupInfo Group
+    public GroupInfoDTO Group
     {
       get => group;
       set => SetProperty(ref group, value);
     }
 
-    private ObservableCollection<GroupInfo> groups = new ObservableCollection<GroupInfo>();
+    private ICollection<GroupInfoDTO> groups = null!;
 
-    public ObservableCollection<GroupInfo> Groups
+    public ICollection<GroupInfoDTO> Groups
     {
       get => groups;
       set => SetProperty(ref groups, value);
@@ -48,10 +49,12 @@ namespace SampleApp.ViewModels
 
     #endregion
 
-    public GroupViewModel(ILogger<GroupViewModel> logger, DatabaseService dbService)
+    public GroupViewModel(ILogger<GroupViewModel> logger, SampleDataService dbService)
     {
       this.logger = logger;
       this.dbService = dbService;
+
+      Group = new GroupInfoDTO();
 
       SelectCommand = new RelayCommand(OnSelect);
       SaveCommand = new RelayCommand(OnSave);
@@ -60,22 +63,27 @@ namespace SampleApp.ViewModels
 
     private async void OnSelect()
     {
-      var groups = await dbService.SelectGroupInfos();
-      Groups = new ObservableCollection<GroupInfo>(groups);
+      Groups = await dbService.SelectGroupInfoDTOs();
 
-      Group = new GroupInfo();
+      Group = new GroupInfoDTO();
     }
 
     private async void OnSave()
     {
       if (Group.GroupId == null)
       {
-        await dbService.InsertGroupInfo(Group);
-        OnSelect();
+        if (IsValidGroup())
+        {
+          await dbService.InsertGroupInfoDTO(Group);
+          OnSelect();
+        }
       }
       else
       {
-        await dbService.UpdateGroupInfo((int)Group.GroupId, Group);
+        if (IsValidGroup())
+        {
+          await dbService.UpdateGroupInfoDTO((int)Group.GroupId, Group);
+        }
       }
     }
 
@@ -83,8 +91,17 @@ namespace SampleApp.ViewModels
     {
       if (Group.GroupId != null)
       {
-        await dbService.DeleteGroupInfo((int)Group.GroupId);
+        await dbService.DeleteGroupInfoDTO((int)Group.GroupId);
+        OnSelect();
       }
+    }
+
+    private bool IsValidGroup()
+    {
+      if (!string.IsNullOrWhiteSpace(Group.GroupName))
+        return true;
+
+      return false;
     }
   }
 }

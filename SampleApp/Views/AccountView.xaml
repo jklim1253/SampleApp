@@ -8,6 +8,7 @@
       xmlns:dto="clr-namespace:SampleModel.DTO;assembly=SampleModel"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="500"
+      Style="{StaticResource MainPage}"
       Title="AccountView">
   <Grid Style="{StaticResource MainView}">
     <Grid.RowDefinitions>
@@ -15,22 +16,69 @@
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
     <StackPanel Grid.Row="0"
-                Orientation="Vertical">
-      <TextBox Text="{Binding User.UserId}" IsReadOnly="True"/>
-      <TextBox Text="{Binding User.UserName}"/>
-      <TextBox Text="{Binding User.Password}"/>
-      <ComboBox ItemsSource="{Binding Groups}"
+                Orientation="Vertical"
+                Grid.IsSharedSizeScope="True">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" SharedSizeGroup="Tag"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="UserId: "
+                   Margin="5 0 5 0"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1"
+                 Style="{StaticResource BaseInput}"
+                 Text="{Binding User.UserId}"
+                 IsReadOnly="True"/>
+      </Grid>
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" SharedSizeGroup="Tag"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="UserName: "
+                   Margin="5 0 5 0"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1"
+                 Style="{StaticResource BaseInput}"
+                 Text="{Binding User.UserName}"/>
+      </Grid>
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" SharedSizeGroup="Tag"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Password: "
+                   Margin="5 0 5 0"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1"
+                 Style="{StaticResource BaseInput}"
+                 Text="{Binding User.Password}"/>
+      </Grid>
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" SharedSizeGroup="Tag"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Group: "
+                   Margin="5 0 5 0"
+                   HorizontalAlignment="Right"/>
+        <ComboBox Grid.Column="1" ItemsSource="{Binding Groups}"
                 SelectedItem="{Binding User.Group}">
-        <ComboBox.ItemTemplate>
-          <DataTemplate DataType="{x:Type dto:GroupInfoDTO}">
-            <StackPanel Orientation="Horizontal">
-              <TextBlock Text="{Binding GroupId}"/>
-              <TextBlock Text=" - "/>
-              <TextBlock Text="{Binding GroupName}"/>
-            </StackPanel>
-          </DataTemplate>
-        </ComboBox.ItemTemplate>
-      </ComboBox>
+          <ComboBox.ItemTemplate>
+            <DataTemplate DataType="{x:Type dto:GroupInfoDTO}">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding GroupId}"/>
+                <TextBlock Text=" - "/>
+                <TextBlock Text="{Binding GroupName}"/>
+              </StackPanel>
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
+      </Grid>
       <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*"/>
@@ -39,12 +87,15 @@
         </Grid.ColumnDefinitions>
         <Button Grid.Column="0"
                 Content="Select"
+                Style="{StaticResource NormalButton}"
                 Command="{Binding SelectCommand}"/>
         <Button Grid.Column="1"
                 Content="Save"
+                Style="{StaticResource NormalButton}"
                 Command="{Binding SaveCommand}"/>
         <Button Grid.Column="2"
                 Content="Delete"
+                Style="{StaticResource NormalButton}"
                 Command="{Binding DeleteCommand}"/>
       </Grid>
     </StackPanel>
@@ -63,6 +114,12 @@
                             DisplayMemberBinding="{Binding Group.GroupName}"/>
           </GridView>
         </ListView.View>
+        <ListView.Style>
+          <Style TargetType="{x:Type ListView}">
+            <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BaseBackBrush}"/>
+          </Style>
+        </ListView.Style>
       </ListView>
     </Grid>
   </Grid>

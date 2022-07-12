@@ -17,7 +17,7 @@ namespace SampleApp.ViewModels
     #region Fields
 
     private readonly ILogger<AccountViewModel> logger;
-    private readonly DatabaseService dbService;
+    private readonly SampleDataService dbService;
 
     #endregion
 
@@ -57,7 +57,7 @@ namespace SampleApp.ViewModels
 
     #endregion
 
-    public AccountViewModel(ILogger<AccountViewModel> logger, DatabaseService dbService)
+    public AccountViewModel(ILogger<AccountViewModel> logger, SampleDataService dbService)
     {
       this.logger = logger;
       this.dbService = dbService;
@@ -82,13 +82,19 @@ namespace SampleApp.ViewModels
     {
       if (User.UserId == null)
       {
-        await dbService.InsertUserInfoDTO(User);
+        if (IsValidUser())
+        {
+          await dbService.InsertUserInfoDTO(User);
 
-        OnSelect();
+          OnSelect();
+        }
       }
       else
       {
-        await dbService.UpdateUserInfoDTO((int)User.UserId, User);
+        if (IsValidUser())
+        {
+          await dbService.UpdateUserInfoDTO((int)User.UserId, User);
+        }
       }
     }
 
@@ -100,6 +106,15 @@ namespace SampleApp.ViewModels
 
         OnSelect();
       }
+    }
+
+    private bool IsValidUser()
+    {
+      if (User.UserName != null &&
+          User.Password != null)
+        return true;
+
+      return false;
     }
   }
 }
