@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SampleModel.Services
 {
-  public partial class DatabaseService
+  public partial class SampleDataService
   {
     public async Task<ICollection<UserInfo>>
       SelectUserInfos()

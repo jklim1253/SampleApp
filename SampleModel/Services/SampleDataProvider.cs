@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SampleModel.Services
 {
-  public class DatabaseProvider
+  public class SampleDataProvider
   {
     public SampleContext GetSampleContext()
     {

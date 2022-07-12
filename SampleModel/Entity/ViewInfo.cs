@@ -13,9 +13,9 @@ namespace SampleModel.Entity
   {
     [Key]
     [Column("viewid")]
-    public int ViewId { get; set; }
+    public int? ViewId { get; set; }
 
     [Column("viewname")]
-    public string ViewName { get; set; }
+    public string? ViewName { get; set; }
   }
 }

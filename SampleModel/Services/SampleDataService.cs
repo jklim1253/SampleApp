@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace SampleModel.Services
 {
-  public partial class DatabaseService
+  public partial class SampleDataService
   {
-    private readonly ILogger<DatabaseService> logger;
-    private readonly DatabaseProvider provider;
+    private readonly ILogger<SampleDataService> logger;
+    private readonly SampleDataProvider provider;
 
-    public DatabaseService(ILogger<DatabaseService> logger, DatabaseProvider provider)
+    public SampleDataService(ILogger<SampleDataService> logger, SampleDataProvider provider)
     {
       this.logger = logger;
       this.provider = provider;

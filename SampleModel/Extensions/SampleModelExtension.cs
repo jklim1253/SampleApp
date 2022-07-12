@@ -15,8 +15,8 @@ namespace SampleModel.Extensions
     {
       return builder.ConfigureServices((context, services) =>
       {
-        services.AddSingleton<DatabaseProvider>();
-        services.AddSingleton<DatabaseService>();
+        services.AddSingleton<SampleDataProvider>();
+        services.AddSingleton<SampleDataService>();
       });
     }
   }

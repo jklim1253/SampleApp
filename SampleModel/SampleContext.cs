@@ -5,10 +5,10 @@ namespace SampleModel
 {
   public class SampleContext : DbContext
   {
-    public DbSet<UserInfo> UserInfos { get; set; }
-    public DbSet<GroupInfo> GroupInfos { get; set; }
-    public DbSet<ViewInfo> ViewInfos { get; set; }
-    public DbSet<GroupViewRelation> GroupViewRelations { get; set; }
+    public DbSet<UserInfo> UserInfos { get; set; } = null!;
+    public DbSet<GroupInfo> GroupInfos { get; set; } = null!;
+    public DbSet<ViewInfo> ViewInfos { get; set; } = null!;
+    public DbSet<GroupViewRelation> GroupViewRelations { get; set; } = null!;
 
     public SampleContext(DbContextOptions options) : base(options)
     {
