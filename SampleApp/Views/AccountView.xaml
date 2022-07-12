@@ -104,6 +104,13 @@
                 SelectedItem="{Binding User}">
         <ListView.View>
           <GridView>
+            <GridView.ColumnHeaderContainerStyle>
+              <Style TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource BaseBackBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource BaseForeBrush}"/>
+              </Style>
+            </GridView.ColumnHeaderContainerStyle>
             <GridViewColumn Header="UserId"
                             DisplayMemberBinding="{Binding UserId}"/>
             <GridViewColumn Header="UserName"
@@ -117,6 +124,7 @@
         <ListView.Style>
           <Style TargetType="{x:Type ListView}">
             <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource BaseForeBrush}"/>
             <Setter Property="BorderBrush" Value="{StaticResource BaseBackBrush}"/>
           </Style>
         </ListView.Style>

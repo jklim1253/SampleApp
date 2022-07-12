@@ -11,26 +11,23 @@
       Title="SettingView">
   <Grid Style="{StaticResource MainView}">
     <StackPanel Orientation="Vertical"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-      <TextBlock Text="SettingView"/>
-      <TextBlock Text="{Binding Title}"/>
-      <ComboBox ItemsSource="{Binding Depot}"
-                SelectedItem="{Binding Selected}">
-        <ComboBox.ItemTemplate>
-          <DataTemplate DataType="{x:Type testdata:TestData}">
-            <StackPanel Orientation="Horizontal">
-              <TextBlock Text="{Binding Id}"/>
-              <TextBlock Text=" - "/>
-              <TextBlock Text="{Binding Name}"/>
-            </StackPanel> 
-          </DataTemplate>
-        </ComboBox.ItemTemplate>
-      </ComboBox>
-      <Button Content="Click"
-              Command="{Binding ClickCommand}"/>
-      <Button Content="Click2"
-              Command="{Binding Click2Command}"/>
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top">
+      <Border>
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          <TextBlock Text="Database"/>
+          <StackPanel Grid.Column="1" Orientation="Vertical">
+            <Button Content="Migration"
+                    Command="{Binding MigrationCommand}"/>
+            <Button Content="Insert SampleData"
+                    Command="{Binding InsertSampleCommand}"/>
+          </StackPanel>
+        </Grid>
+      </Border>
     </StackPanel>
   </Grid>
 </Page>
