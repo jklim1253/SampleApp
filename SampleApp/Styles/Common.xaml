@@ -96,8 +96,15 @@
     <Setter Property="BorderBrush" Value="{StaticResource InputBackBrush}"/>
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="Foreground" Value="{StaticResource BaseForeBrush}"/>
-    <Setter Property="Padding" Value="2"/>
-    <Setter Property="Margin" Value="2"/>
+    <Setter Property="Padding" Value="4"/>
+    <Setter Property="Margin" Value="4"/>
+    <Style.Triggers>
+      <Trigger Property="IsMouseOver" Value="True">
+        <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource HighForeBrush}"/>
+      </Trigger>
+    </Style.Triggers>
   </Style>
 
   <Style x:Key="BaseInput" TargetType="{x:Type TextBox}">
@@ -121,5 +128,140 @@
         </ControlTemplate>
       </Setter.Value>
     </Setter>
+  </Style>
+
+  <Style x:Key="{x:Static GridView.GridViewScrollViewerStyleKey}"
+         TargetType="ScrollViewer">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ScrollViewer">
+          <Grid Background="{TemplateBinding Background}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <DockPanel Margin="{TemplateBinding Padding}">
+              <ScrollViewer DockPanel.Dock="Top"
+                            VerticalScrollBarVisibility="Hidden"
+                            HorizontalScrollBarVisibility="Hidden"
+                            Focusable="False">
+                <GridViewHeaderRowPresenter Margin="5"
+                                            Columns="{Binding
+                  Path=TemplatedParent.View.Columns,
+                  RelativeSource={RelativeSource TemplatedParent}}"
+                                            ColumnHeaderContainerStyle="{Binding
+                  Path=TemplatedParent.View.ColumnHeaderContainerStyle,
+                  RelativeSource={RelativeSource TemplatedParent}}"
+                                            ColumnHeaderTemplate="{Binding
+                  Path=TemplatedParent.View.ColumnHeaderTemplate,
+                  RelativeSource={RelativeSource TemplatedParent}}"
+                                            ColumnHeaderTemplateSelector="{Binding 
+                  Path=TemplatedParent.View.ColumnHeaderTemplateSelector,
+                  RelativeSource={RelativeSource TemplatedParent}}"
+                                            AllowsColumnReorder="{Binding
+                  Path=TemplatedParent.View.AllowsColumnReorder,
+                  RelativeSource={RelativeSource TemplatedParent}}"
+                                            ColumnHeaderContextMenu="{Binding
+                  Path=TemplatedParent.View.ColumnHeaderContextMenu,
+                  RelativeSource={RelativeSource TemplatedParent}}"
+                                            ColumnHeaderToolTip="{Binding
+                  Path=TemplatedParent.View.ColumnHeaderToolTip,
+                  RelativeSource={RelativeSource TemplatedParent}}"
+                                            SnapsToDevicePixels="{TemplateBinding
+                  SnapsToDevicePixels}"
+                />
+              </ScrollViewer>
+
+              <ScrollContentPresenter Name="PART_ScrollContentPresenter"
+                                      KeyboardNavigation.DirectionalNavigation="Local"
+                                      CanContentScroll="True"
+                                      CanHorizontallyScroll="False"
+                                      CanVerticallyScroll="False"/>
+            </DockPanel>
+
+            <ScrollBar Name="PART_HorizontalScrollBar"
+                       Orientation="Horizontal"
+                       Grid.Row="1"
+                       Maximum="{TemplateBinding ScrollableWidth}"
+                       ViewportSize="{TemplateBinding ViewportWidth}"
+                       Value="{TemplateBinding HorizontalOffset}"
+                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+            <ScrollBar Name="PART_VerticalScrollBar"
+                       Orientation="Vertical"
+                       Grid.Column="1"
+                       Maximum="{TemplateBinding ScrollableHeight}"
+                       ViewportSize="{TemplateBinding ViewportHeight}"
+                       Value="{TemplateBinding VerticalOffset}"
+                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="NormalListView" TargetType="{x:Type ListView}">
+    <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+    <Setter Property="Foreground" Value="{StaticResource BaseForeBrush}"/>
+    <Setter Property="BorderBrush" Value="{StaticResource BaseBackBrush}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ListView">
+          <Border BorderThickness="1"
+                  BorderBrush="Orange">
+            <ScrollViewer Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}">
+              <ItemsPresenter/>
+            </ScrollViewer>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="{x:Type ListViewItem}"
+         TargetType="ListViewItem">
+    <Setter Property="OverridesDefaultStyle" Value="True"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ListViewItem">
+          <Border x:Name="Border"
+                  Padding="5"
+                  BorderThickness="1"
+                  BorderBrush="Transparent"
+                  Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal"/>
+                <VisualState x:Name="MouseOver">
+                  <Storyboard>
+                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                  Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)">
+                      <EasingColorKeyFrame KeyTime="0"
+                                           Value="#00AA00"/>
+                    </ColorAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Selected">
+                  <Storyboard>
+                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                  Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)">
+                      <EasingColorKeyFrame KeyTime="0"
+                                           Value="Orange"/>
+                    </ColorAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="NormalGridView" TargetType="{x:Type GridViewColumnHeader}">
+    <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+    <Setter Property="BorderBrush" Value="{StaticResource BaseBackBrush}"/>
+    <Setter Property="Foreground" Value="{StaticResource BaseForeBrush}"/>
   </Style>
 </ResourceDictionary>

@@ -15,9 +15,37 @@
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
     <StackPanel Grid.Row="0"
-                Orientation="Vertical">
-      <TextBox Text="{Binding Group.GroupId}" IsReadOnly="True"/>
-      <TextBox Text="{Binding Group.GroupName}"/>
+                Orientation="Vertical"
+                Grid.IsSharedSizeScope="True">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" SharedSizeGroup="Tag"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+          <TextBlock Text="GroupId: "
+                     Margin="5 0"/>
+        </Border>
+        <TextBox Grid.Column="1"
+                 Style="{StaticResource BaseInput}"
+                 Text="{Binding Group.GroupId}"
+                 IsReadOnly="True"/>
+      </Grid>
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" SharedSizeGroup="Tag"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+          <TextBlock Text="GroupName: "
+                     Margin="5 0"/>
+        </Border>
+        <TextBox Grid.Column="1"
+                 Style="{StaticResource BaseInput}"
+                 Text="{Binding Group.GroupName}"/>
+      </Grid>
       <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*"/>
@@ -26,26 +54,34 @@
         </Grid.ColumnDefinitions>
         <Button Grid.Column="0"
                 Content="Select"
+                Style="{StaticResource NormalButton}"
                 Command="{Binding SelectCommand}"/>
         <Button Grid.Column="1"
                 Content="Save"
+                Style="{StaticResource NormalButton}"
                 Command="{Binding SaveCommand}"/>
         <Button Grid.Column="2"
                 Content="Delete"
+                Style="{StaticResource NormalButton}"
                 Command="{Binding DeleteCommand}"/>
       </Grid>
     </StackPanel>
     <Grid Grid.Row="1">
       <ListView ItemsSource="{Binding Groups}"
-                SelectedItem="{Binding Group}">
+                SelectedItem="{Binding Group}"
+                Background="{StaticResource HighBackBrush}"
+                Foreground="{StaticResource HighForeBrush}">
         <ListView.ItemTemplate>
           <DataTemplate DataType="{x:Type dto:GroupInfoDTO}">
             <Expander ExpandDirection="Down" IsExpanded="True">
               <Expander.Header>
                 <StackPanel Orientation="Horizontal">
-                  <TextBlock Text="{Binding GroupId}"/>
-                  <TextBlock Text=" - "/>
-                  <TextBlock Text="{Binding GroupName}"/>
+                  <TextBlock Margin="10 0"
+                             Foreground="{StaticResource BaseForeBrush}">
+                    <Run Text="{Binding GroupId}"/>
+                    <Run Text=" - "/>
+                    <Run Text="{Binding GroupName}"/>
+                  </TextBlock>
                 </StackPanel>
               </Expander.Header>
               <ItemsControl ItemsSource="{Binding Views}">
@@ -66,18 +102,23 @@
                           <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0"
+                                   Foreground="{StaticResource BaseForeBrush}"
                                    Text="{Binding ViewName}"/>
                         <CheckBox Grid.Column="1"
                                   Content="CanRead"
+                                  Foreground="{StaticResource BaseForeBrush}"
                                   IsChecked="{Binding CanRead}"/>
                         <CheckBox Grid.Column="2"
                                   Content="CanInsert"
+                                  Foreground="{StaticResource BaseForeBrush}"
                                   IsChecked="{Binding CanInsert}"/>
                         <CheckBox Grid.Column="3"
                                   Content="CanUpdate"
+                                  Foreground="{StaticResource BaseForeBrush}"
                                   IsChecked="{Binding CanUpdate}"/>
                         <CheckBox Grid.Column="4"
                                   Content="CanDelete"
+                                  Foreground="{StaticResource BaseForeBrush}"
                                   IsChecked="{Binding CanDelete}"/>
                       </Grid>
                     </Border>

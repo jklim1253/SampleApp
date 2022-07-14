@@ -14,9 +14,37 @@
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
     <StackPanel Grid.Row="0"
-                Orientation="Vertical">
-      <TextBox Text="{Binding ViewInfo.ViewId}" IsReadOnly="True"/>
-      <TextBox Text="{Binding ViewInfo.ViewName}"/>
+                Orientation="Vertical"
+                Grid.IsSharedSizeScope="True">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" SharedSizeGroup="Tag"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+          <TextBlock Text="ViewId: "
+                     Margin="5 0"/>
+        </Border>
+        <TextBox Grid.Column="1"
+                 Text="{Binding ViewInfo.ViewId}"
+                 Style="{StaticResource BaseInput}"
+                 IsReadOnly="True"/>
+      </Grid>
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" SharedSizeGroup="Tag"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+          <TextBlock Text="ViewName: "
+                     Margin="5 0"/>
+        </Border>
+        <TextBox Grid.Column="1"
+                 Text="{Binding ViewInfo.ViewName}"
+                 Style="{StaticResource BaseInput}"/>
+      </Grid>
       <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*"/>
@@ -25,20 +53,24 @@
         </Grid.ColumnDefinitions>
         <Button Grid.Column="0"
                 Content="Select"
+                Style="{StaticResource NormalButton}"
                 Command="{Binding SelectCommand}"/>
         <Button Grid.Column="1"
                 Content="Save"
+                Style="{StaticResource NormalButton}"
                 Command="{Binding SaveCommand}"/>
         <Button Grid.Column="2"
                 Content="Delete"
+                Style="{StaticResource NormalButton}"
                 Command="{Binding DeleteCommand}"/>
       </Grid>
     </StackPanel>
     <Grid Grid.Row="1">
       <ListView ItemsSource="{Binding ViewInfos}"
-                SelectedItem="{Binding ViewInfo}">
+                SelectedItem="{Binding ViewInfo}"
+                Style="{StaticResource NormalListView}">
         <ListView.View>
-          <GridView>
+          <GridView ColumnHeaderContainerStyle="{StaticResource NormalGridView}">
             <GridViewColumn Header="ViewId" DisplayMemberBinding="{Binding ViewId}"/>
             <GridViewColumn Header="ViewName" DisplayMemberBinding="{Binding ViewName}"/>
           </GridView>

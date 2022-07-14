@@ -79,6 +79,22 @@
           </Style>
         </Button.Style>
       </Button>
+      <Button Content="&#xE74C;"
+              ToolTip="Architecture"
+              Command="{Binding RequestPageCommand}"
+              CommandParameter="ArchitectureView.xaml">
+        <Button.Style>
+          <Style TargetType="Button" BasedOn="{StaticResource MenuButton}">
+            <Style.Triggers>
+              <DataTrigger Binding="{Binding CurrentMenu}" Value="ArchitectureView">
+                <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource HighBackBrush}"/>
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </Button.Style>
+      </Button>
     </StackPanel>
     <StackPanel Grid.Row="2"
                 Orientation="Vertical">

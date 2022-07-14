@@ -9,25 +9,78 @@
       Style="{StaticResource MainPage}"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SettingView">
-  <Grid Style="{StaticResource MainView}">
-    <StackPanel Orientation="Vertical"
+  <ScrollViewer>
+    <ScrollViewer.Style>
+      <Style TargetType="{x:Type ScrollViewer}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type ScrollViewer}">
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*"/>
+                  <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="*"/>
+                  <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0"
+                        Grid.Column="0">
+                  <ScrollContentPresenter CanContentScroll="{TemplateBinding CanContentScroll}"/>
+                </Border>
+                <ScrollBar x:Name="PART_VerticalScrollBar"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           Value="{TemplateBinding VerticalOffset}"
+                           Maximum="{TemplateBinding ScrollableHeight}"
+                           ViewportSize="{TemplateBinding ViewportHeight}">
+                  <ScrollBar.Style>
+                    <Style TargetType="{x:Type ScrollBar}">
+                      <Setter Property="Focusable" Value="False"/>
+                      <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+                      <Setter Property="BorderBrush" Value="{StaticResource BaseBackBrush}"/>
+                    </Style>
+                  </ScrollBar.Style>
+                </ScrollBar>
+              </Grid>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+    </ScrollViewer.Style>
+    <Grid Style="{StaticResource MainView}">
+      <StackPanel Orientation="Vertical"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Top">
-      <Border>
-        <Grid>
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-          </Grid.ColumnDefinitions>
-          <TextBlock Text="Database"/>
-          <StackPanel Grid.Column="1" Orientation="Vertical">
-            <Button Content="Migration"
+        <Border>
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0"
+                  Background="{StaticResource BaseBackBrush}"
+                  Width="100">
+              <Grid VerticalAlignment="Center"
+                  HorizontalAlignment="Center">
+                <TextBlock Text="Database"/>
+              </Grid>
+            </Border>
+            <StackPanel Grid.Column="1" Orientation="Vertical">
+              <Button Content="Migration"
+                    Style="{StaticResource NormalButton}"
                     Command="{Binding MigrationCommand}"/>
-            <Button Content="Insert SampleData"
+              <Button Content="Insert SampleData"
+                    Style="{StaticResource NormalButton}"
                     Command="{Binding InsertSampleCommand}"/>
-          </StackPanel>
-        </Grid>
-      </Border>
-    </StackPanel>
-  </Grid>
+            </StackPanel>
+          </Grid>
+        </Border>
+        <Border Height="400">
+          
+        </Border>
+      </StackPanel>
+    </Grid>
+  </ScrollViewer>
 </Page>

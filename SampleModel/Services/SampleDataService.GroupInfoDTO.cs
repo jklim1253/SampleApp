@@ -53,8 +53,10 @@ namespace SampleModel.Services
     }
 
     public async Task<GroupInfoDTO?>
-      SelectGroupInfoDTO(int id)
+      SelectGroupInfoDTO(int? id)
     {
+      if (id == null) return null;
+
       using (var context = provider.GetSampleContext())
       {
         var views = await context.ViewInfos
@@ -95,7 +97,7 @@ namespace SampleModel.Services
         var createdInfo = await context.GroupInfos.AddAsync(info);
         await context.SaveChangesAsync();
 
-        var createdInfoDTO = await SelectGroupInfoDTO((int)createdInfo.Entity.GroupId);
+        var createdInfoDTO = await SelectGroupInfoDTO(createdInfo.Entity.GroupId);
 
         return createdInfoDTO;
       }
@@ -114,7 +116,7 @@ namespace SampleModel.Services
         context.Entry(target).State = EntityState.Modified;
         await context.SaveChangesAsync();
 
-        var updatedInfoDTO = await SelectGroupInfoDTO((int)target.GroupId);
+        var updatedInfoDTO = await SelectGroupInfoDTO(target.GroupId);
 
         return updatedInfoDTO;
       }
