@@ -5,6 +5,8 @@
   <Color x:Key="BaseForeColor">#BDBDBD</Color>
   <Color x:Key="HighBackColor">#282C34</Color>
   <Color x:Key="HighForeColor">#E06C75</Color>
+  <Color x:Key="PressBackColor">#282C34</Color>
+  <Color x:Key="PressForeColor">#756CE0</Color>
   <Color x:Key="InputBackColor">#383C44</Color>
   <Color x:Key="InputForeColor">#A0A0A0</Color>
 
@@ -18,6 +20,8 @@
   <SolidColorBrush x:Key="BaseForeBrush" Color="{StaticResource BaseForeColor}"/>
   <SolidColorBrush x:Key="HighBackBrush" Color="{StaticResource HighBackColor}"/>
   <SolidColorBrush x:Key="HighForeBrush" Color="{StaticResource HighForeColor}"/>
+  <SolidColorBrush x:Key="PressBackBrush" Color="{StaticResource PressBackColor}"/>
+  <SolidColorBrush x:Key="PressForeBrush" Color="{StaticResource PressForeColor}"/>
   <SolidColorBrush x:Key="InputBackBrush" Color="{StaticResource InputBackColor}"/>
   <SolidColorBrush x:Key="InputForeBrush" Color="{StaticResource InputForeColor}"/>
 
@@ -63,6 +67,11 @@
               <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
               <Setter Property="BorderBrush" Value="{StaticResource HighBackBrush}"/>
             </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+              <Setter Property="Background" Value="{StaticResource PressBackBrush}"/>
+              <Setter Property="Foreground" Value="{StaticResource PressForeBrush}"/>
+              <Setter Property="BorderBrush" Value="{StaticResource PressBackBrush}"/>
+            </Trigger>
           </ControlTemplate.Triggers>
         </ControlTemplate>
       </Setter.Value>
@@ -103,6 +112,11 @@
         <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource HighForeBrush}"/>
+      </Trigger>
+      <Trigger Property="IsPressed" Value="True">
+        <Setter Property="Background" Value="{StaticResource PressBackBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource PressForeBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PressForeBrush}"/>
       </Trigger>
     </Style.Triggers>
   </Style>
