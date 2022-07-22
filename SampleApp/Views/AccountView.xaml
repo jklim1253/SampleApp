@@ -106,7 +106,8 @@
     </StackPanel>
     <Grid Grid.Row="1">
       <ListView ItemsSource="{Binding Users}"
-                SelectedItem="{Binding User}">
+                SelectedItem="{Binding User}"
+                >
         <ListView.View>
           <GridView>
             <GridView.ColumnHeaderContainerStyle>
@@ -127,7 +128,7 @@
           </GridView>
         </ListView.View>
         <ListView.Style>
-          <Style TargetType="{x:Type ListView}">
+          <Style TargetType="{x:Type ListView}" BasedOn="{StaticResource NormalListView}">
             <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
             <Setter Property="Foreground" Value="{StaticResource BaseForeBrush}"/>
             <Setter Property="BorderBrush" Value="{StaticResource BaseBackBrush}"/>

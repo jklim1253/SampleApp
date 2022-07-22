@@ -4,16 +4,69 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SampleApp.Views"
+      xmlns:controls="clr-namespace:SampleApp.Controls"
       mc:Ignorable="d" 
       Style="{StaticResource MainPage}"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HomeView">
   <Grid Style="{StaticResource MainView}">
-    <StackPanel Orientation="Vertical"
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Left">
+      <TextBox Text="{Binding SelectedItem.Id}"
+               Width="60"
+               Style="{StaticResource BaseInput}"
+               IsReadOnly="True"/>
+      <TextBox Text="{Binding SelectedItem.URL}"
+               Width="200"
+               Style="{StaticResource BaseInput}"/>
+      <Button Content="Add"
+              Style="{StaticResource NormalButton}"
+              Command="{Binding AddCommand}"/>
+      <Button Content="Remove"
+              Style="{StaticResource NormalButton}"
+              Command="{Binding RemoveCommand}"/>
+    </StackPanel>
+    <ScrollViewer Grid.Row="1"
+                  VerticalScrollBarVisibility="Auto">
+      <WrapPanel Orientation="Horizontal"
+                 >
+        <ItemsControl ItemsSource="{Binding LiveViews}"
+                      Focusable="False">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapPanel Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="{x:Type controls:SampleBoxInfo}">
+              <Border Padding="4"
+                      Focusable="True">
+                <controls:SampleBox Id="{Binding Path=Id}" URL="{Binding Path=URL}" />
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </WrapPanel>
+    </ScrollViewer>
+    <StackPanel Grid.Row="1"
+                Orientation="Vertical"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-      <TextBlock Text="HomeView"/>
-      <TextBlock Text="{Binding Title}"/>
+                VerticalAlignment="Center"
+                Background="Transparent">
+      <TextBlock Text="SampleBox Control"
+                 FontFamily="Times New Roman"
+                 FontSize="50"
+                 FontStyle="Italic"
+                 FontWeight="Bold"/>
+      <TextBlock Text="{Binding Title}"
+                 FontFamily="Times New Roman"
+                 FontSize="20"
+                 FontStyle="Oblique"
+                 HorizontalAlignment="Center"/>
     </StackPanel>
   </Grid>
 </Page>

@@ -31,14 +31,33 @@
           </Style>
         </Button.Style>
       </Button>
-      <Button Content="&#xE77B;"
-              ToolTip="Account"
+      <Button Content="&#xE74C;"
+              ToolTip="Architecture"
               Command="{Binding RequestPageCommand}"
-              CommandParameter="AccountView.xaml">
+              CommandParameter="ArchitectureView.xaml">
         <Button.Style>
           <Style TargetType="Button" BasedOn="{StaticResource MenuButton}">
             <Style.Triggers>
-              <DataTrigger Binding="{Binding CurrentMenu}" Value="AccountView">
+              <DataTrigger Binding="{Binding CurrentMenu}" Value="ArchitectureView">
+                <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource HighBackBrush}"/>
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </Button.Style>
+      </Button>
+    </StackPanel>
+    <StackPanel Grid.Row="2"
+                Orientation="Vertical">
+      <Button Content="&#xE736;"
+              ToolTip="View"
+              Command="{Binding RequestPageCommand}"
+              CommandParameter="ViewView.xaml">
+        <Button.Style>
+          <Style TargetType="Button" BasedOn="{StaticResource MenuButton}">
+            <Style.Triggers>
+              <DataTrigger Binding="{Binding CurrentMenu}" Value="ViewView">
                 <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
                 <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
                 <Setter Property="BorderBrush" Value="{StaticResource HighBackBrush}"/>
@@ -63,14 +82,14 @@
           </Style>
         </Button.Style>
       </Button>
-      <Button Content="&#xE736;"
-              ToolTip="View"
+      <Button Content="&#xE77B;"
+              ToolTip="Account"
               Command="{Binding RequestPageCommand}"
-              CommandParameter="ViewView.xaml">
+              CommandParameter="AccountView.xaml">
         <Button.Style>
           <Style TargetType="Button" BasedOn="{StaticResource MenuButton}">
             <Style.Triggers>
-              <DataTrigger Binding="{Binding CurrentMenu}" Value="ViewView">
+              <DataTrigger Binding="{Binding CurrentMenu}" Value="AccountView">
                 <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
                 <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
                 <Setter Property="BorderBrush" Value="{StaticResource HighBackBrush}"/>
@@ -79,25 +98,6 @@
           </Style>
         </Button.Style>
       </Button>
-      <Button Content="&#xE74C;"
-              ToolTip="Architecture"
-              Command="{Binding RequestPageCommand}"
-              CommandParameter="ArchitectureView.xaml">
-        <Button.Style>
-          <Style TargetType="Button" BasedOn="{StaticResource MenuButton}">
-            <Style.Triggers>
-              <DataTrigger Binding="{Binding CurrentMenu}" Value="ArchitectureView">
-                <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
-                <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
-                <Setter Property="BorderBrush" Value="{StaticResource HighBackBrush}"/>
-              </DataTrigger>
-            </Style.Triggers>
-          </Style>
-        </Button.Style>
-      </Button>
-    </StackPanel>
-    <StackPanel Grid.Row="2"
-                Orientation="Vertical">
       <Button Content="&#xE713;"
               ToolTip="Setting"
               Command="{Binding RequestPageCommand}"

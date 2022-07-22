@@ -71,11 +71,18 @@ namespace SampleApp.ViewModels
 
     private async void OnSelect()
     {
-      Users = await dbService.SelectUserInfoDTOs();
+      try
+      {
+        Users = await dbService.SelectUserInfoDTOs();
 
-      Groups = await dbService.SelectGroupInfoDTOs();
+        Groups = await dbService.SelectGroupInfoDTOs();
 
-      User = new UserInfoDTO();
+        User = new UserInfoDTO();
+      }
+      catch (Exception ex)
+      {
+        logger.LogError($"Exception:[{ex.HResult}]: {ex.Message}");
+      }
     }
 
     private async void OnSave()

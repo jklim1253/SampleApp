@@ -8,11 +8,16 @@
         mc:Ignorable="d"
         WindowStyle="None"
         Topmost="True"
+        MinWidth="600"
+        MinHeight="500"
+        Background="{StaticResource BaseBackBrush}"
         Title="MainWindow" Height="450" Width="500">
   <WindowChrome.WindowChrome>
-    <WindowChrome CaptionHeight="{StaticResource BaseUnit}"/>
+    <WindowChrome CaptionHeight="{StaticResource BaseUnit}" CornerRadius="20"/>
   </WindowChrome.WindowChrome>
-  <Border BorderThickness="1" BorderBrush="OrangeRed">
+  <Border BorderThickness="1"
+          BorderBrush="OrangeRed"
+          Background="{StaticResource BaseBackBrush}">
     <Border.Style>
       <Style TargetType="Border">
         <Style.Triggers>
@@ -111,11 +116,13 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
           <Frame Source="MenuView.xaml"
-               NavigationUIVisibility="Hidden"/>
+                 Focusable="False"
+                 NavigationUIVisibility="Hidden"/>
         </Grid>
         <Grid Grid.Column="1">
           <Frame Source="{Binding CurrentView}"
-               NavigationUIVisibility="Hidden"/>
+                 Focusable="False"
+                 NavigationUIVisibility="Hidden"/>
         </Grid>
       </Grid>
     </Grid>

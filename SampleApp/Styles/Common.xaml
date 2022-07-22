@@ -15,6 +15,12 @@
   <core:Double x:Key="SystemUnit">10</core:Double>
   <core:Double x:Key="InputUnit">25</core:Double>
 
+  
+  <core:Double x:Key="BaseHeight">32</core:Double>
+  <core:Double x:Key="BaseWidth">120</core:Double>
+
+  <core:Double x:Key="BaseInputHeight">32</core:Double>
+  <core:Double x:Key="BaseInputWidth">50</core:Double>
 
   <SolidColorBrush x:Key="BaseBackBrush" Color="{StaticResource BaseBackColor}"/>
   <SolidColorBrush x:Key="BaseForeBrush" Color="{StaticResource BaseForeColor}"/>
@@ -41,15 +47,20 @@
   </Style>
   
   <Style x:Key="SpecialButton" TargetType="{x:Type Button}">
+    <Setter Property="MinHeight" Value="{StaticResource BaseHeight}"/>
+    <Setter Property="MinWidth" Value="{StaticResource BaseWidth}"/>
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type Button}">
           <Border BorderBrush="{TemplateBinding BorderBrush}"
                   BorderThickness="1"
+                  CornerRadius="2"
                   Padding="{TemplateBinding Padding}">
             <Grid Background="{TemplateBinding Background}"
-                Height="{TemplateBinding Height}"
-                Width="{TemplateBinding Width}">
+                  MinWidth="{TemplateBinding MinWidth}"
+                  MinHeight="{TemplateBinding MinHeight}"
+                  Height="{TemplateBinding Height}"
+                  Width="{TemplateBinding Width}">
               <TextBlock Text="{TemplateBinding Content}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
@@ -77,9 +88,11 @@
       </Setter.Value>
     </Setter>
   </Style>
-  <Style x:Key="SystemButton" TargetType="{x:Type Button}" BasedOn="{StaticResource SpecialButton}">
+  <Style x:Key="SystemButton" TargetType="{x:Type Button}">
     <Setter Property="Height" Value="{StaticResource BaseUnit}"/>
     <Setter Property="Width" Value="{StaticResource BaseUnit}"/>
+    <Setter Property="MinHeight" Value="{StaticResource BaseUnit}"/>
+    <Setter Property="MinWidth" Value="{StaticResource BaseUnit}"/>
     <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
     <Setter Property="Background" Value="Transparent"/>
@@ -88,10 +101,50 @@
     <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
     <Setter Property="Padding" Value="0"/>
     <Setter Property="Margin" Value="0"/>
+    <Setter Property="Focusable" Value="False"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Border BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="1"
+                  Padding="{TemplateBinding Padding}">
+            <Grid Background="{TemplateBinding Background}"
+                  MinWidth="{TemplateBinding MinWidth}"
+                  MinHeight="{TemplateBinding MinHeight}"
+                  Height="{TemplateBinding Height}"
+                  Width="{TemplateBinding Width}">
+              <TextBlock Text="{TemplateBinding Content}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontFamily="{TemplateBinding FontFamily}"
+                       FontSize="{TemplateBinding FontSize}"
+                       Foreground="{TemplateBinding Foreground}"
+                       RenderOptions.ClearTypeHint="Auto"
+                       TextOptions.TextRenderingMode="Aliased"
+                       TextOptions.TextFormattingMode="{TemplateBinding TextOptions.TextFormattingMode}"/>
+            </Grid>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter Property="Background" Value="{StaticResource HighBackBrush}"/>
+              <Setter Property="Foreground" Value="{StaticResource HighForeBrush}"/>
+              <Setter Property="BorderBrush" Value="{StaticResource HighBackBrush}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+              <Setter Property="Background" Value="{StaticResource PressBackBrush}"/>
+              <Setter Property="Foreground" Value="{StaticResource PressForeBrush}"/>
+              <Setter Property="BorderBrush" Value="{StaticResource PressBackBrush}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
   </Style>
   <Style x:Key="MenuButton" TargetType="{x:Type Button}" BasedOn="{StaticResource SpecialButton}">
     <Setter Property="Height" Value="{StaticResource BaseUnit}"/>
     <Setter Property="Width" Value="{StaticResource BaseUnit}"/>
+    <Setter Property="MinHeight" Value="{StaticResource BaseUnit}"/>
+    <Setter Property="MinWidth" Value="{StaticResource BaseUnit}"/>
     <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
     <Setter Property="Background" Value="Transparent"/>
@@ -100,6 +153,7 @@
     <Setter Property="TextOptions.TextFormattingMode" Value="Ideal"/>
     <Setter Property="Padding" Value="0"/>
     <Setter Property="Margin" Value="0"/>
+    <Setter Property="Focusable" Value="False"/>
   </Style>
   <Style x:Key="NormalButton" TargetType="{x:Type Button}" BasedOn="{StaticResource SpecialButton}">
     <Setter Property="BorderBrush" Value="{StaticResource InputBackBrush}"/>
@@ -122,23 +176,36 @@
   </Style>
 
   <Style x:Key="BaseInput" TargetType="{x:Type TextBox}">
+    <Setter Property="MinHeight" Value="{StaticResource BaseInputHeight}"/>
+    <Setter Property="MinWidth" Value="{StaticResource BaseInputWidth}"/>
     <Setter Property="Background" Value="{StaticResource InputBackBrush}"/>
     <Setter Property="BorderThickness" Value="0 0 0 1"/>
     <Setter Property="BorderBrush" Value="{StaticResource InputForeBrush}"/>
     <Setter Property="Height" Value="{StaticResource InputUnit}"/>
     <Setter Property="Foreground" Value="White"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type TextBoxBase}">
           <Border Margin="1"
-                  Padding="3 3 3 0"
-                  BorderThickness="0 0 0 1"
-                  BorderBrush="Gray">
+                  Padding="1"
+                  CornerRadius="2"
+                  BorderThickness="1"
+                  BorderBrush="{TemplateBinding BorderBrush}">
             <ScrollViewer x:Name="PART_ContentHost"
                           VerticalScrollBarVisibility="Hidden"
                           HorizontalScrollBarVisibility="Hidden"
                           Background="{TemplateBinding Background}"/>
           </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsReadOnly" Value="True">
+              <Setter Property="Background" Value="{StaticResource BaseBackBrush}"/>
+              <Setter Property="Foreground" Value="{StaticResource BaseForeBrush}"/>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+              <Setter Property="BorderBrush" Value="{StaticResource HighForeBrush}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
         </ControlTemplate>
       </Setter.Value>
     </Setter>

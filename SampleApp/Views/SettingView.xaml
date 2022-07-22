@@ -60,8 +60,9 @@
               <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Border Grid.Column="0"
-                  Background="{StaticResource BaseBackBrush}"
-                  Width="100">
+                    CornerRadius="4"
+                    Background="{StaticResource BaseBackBrush}"
+                    Width="100">
               <Grid VerticalAlignment="Center"
                   HorizontalAlignment="Center">
                 <TextBlock Text="Database"/>
