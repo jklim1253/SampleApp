@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SampleApp.ViewModels;
 using SampleApp.Views;
-using SampleModel;
+using SampleModel.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;

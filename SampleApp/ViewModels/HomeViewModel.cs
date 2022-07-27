@@ -41,6 +41,7 @@ namespace SampleApp.ViewModels
     #region Commands
 
     public IRelayCommand AddCommand { get; }
+    public IRelayCommand RemoveCommand { get; }
 
     #endregion
 
@@ -52,28 +53,27 @@ namespace SampleApp.ViewModels
       // properties
       Title = "ViewModel-Home";
       SelectedItem = new SampleBoxInfo();
-      LiveViews = new ObservableCollection<SampleBoxInfo>()
+      LiveViews = new ObservableCollection<SampleBoxInfo>();
+
+      // sample data.
+      for (int i = 0; i < 10; ++i)
       {
-        new SampleBoxInfo()
+        var info = new SampleBoxInfo()
         {
-          Id = 1,
-          URL = "http://123"
-        },
-        new SampleBoxInfo()
-        {
-          Id = 2,
-          URL = "http://123"
-        },
-        new SampleBoxInfo()
-        {
-          Id = 3,
-          URL = "http://123"
-        }
-      };
+          Id = i,
+          URL = $"http://server/{i}/123/{i * 10}"
+        };
+        LiveViews.Add(info);
+      }
 
       // commands
       AddCommand = new RelayCommand(OnAdd);
+      RemoveCommand = new RelayCommand(OnRemove);
+    }
 
+    private void OnRemove()
+    {
+      // TODO: implement here.
     }
 
     private void OnAdd()

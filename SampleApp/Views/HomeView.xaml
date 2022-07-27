@@ -30,6 +30,22 @@
               Style="{StaticResource NormalButton}"
               Command="{Binding RemoveCommand}"/>
     </StackPanel>
+    <StackPanel Grid.Row="1"
+                Orientation="Vertical"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="Transparent">
+      <TextBlock Text="SampleBox Control"
+                 FontFamily="Times New Roman"
+                 FontSize="50"
+                 FontStyle="Italic"
+                 FontWeight="Bold"/>
+      <TextBlock Text="{Binding Title}"
+                 FontFamily="Times New Roman"
+                 FontSize="20"
+                 FontStyle="Oblique"
+                 HorizontalAlignment="Center"/>
+    </StackPanel>
     <ScrollViewer Grid.Row="1"
                   VerticalScrollBarVisibility="Auto">
       <WrapPanel Orientation="Horizontal"
@@ -52,21 +68,5 @@
         </ItemsControl>
       </WrapPanel>
     </ScrollViewer>
-    <StackPanel Grid.Row="1"
-                Orientation="Vertical"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Background="Transparent">
-      <TextBlock Text="SampleBox Control"
-                 FontFamily="Times New Roman"
-                 FontSize="50"
-                 FontStyle="Italic"
-                 FontWeight="Bold"/>
-      <TextBlock Text="{Binding Title}"
-                 FontFamily="Times New Roman"
-                 FontSize="20"
-                 FontStyle="Oblique"
-                 HorizontalAlignment="Center"/>
-    </StackPanel>
   </Grid>
 </Page>

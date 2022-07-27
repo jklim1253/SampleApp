@@ -3,13 +3,13 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SampleModel;
+using SampleModel.Services;
 
 #nullable disable
 
 namespace SampleModel.Migrations
 {
-    [DbContext(typeof(SampleContext))]
+  [DbContext(typeof(SampleContext))]
     partial class SampleContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

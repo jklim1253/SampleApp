@@ -7,15 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleModel.Services
+namespace SampleModel.DTOServices
 {
-  public partial class SampleDataService
+  public partial class SampleDTOService
   {
     public async Task<ICollection<UserInfoDTO>>
       SelectUserInfoDTOs()
     {
       var groupDTOs = await SelectGroupInfoDTOs();
-      var users = await SelectUserInfos();
+      var users = await dbAccess.SelectUserInfos();
 
       var userDTOs = users
         .Select(e =>
@@ -41,7 +41,7 @@ namespace SampleModel.Services
         GroupId = infoDTO.Group?.GroupId
       };
 
-      var createdUser = await InsertUserInfo(info);
+      var createdUser = await dbAccess.InsertUserInfo(info);
 
       var groups = await SelectGroupInfoDTOs();
 
@@ -65,7 +65,7 @@ namespace SampleModel.Services
         GroupId = infoDTO.Group?.GroupId
       };
 
-      var updatedUser = await UpdateUserInfo(id, info);
+      var updatedUser = await dbAccess.UpdateUserInfo(id, info);
       if (updatedUser == null) return null;
 
       var groups = await SelectGroupInfoDTOs();
@@ -82,7 +82,7 @@ namespace SampleModel.Services
     public async Task<bool>
       DeleteUserInfoDTO(int id)
     {
-      return await DeleteUserInfo(id);
+      return await dbAccess.DeleteUserInfo(id);
     }
   }
 }

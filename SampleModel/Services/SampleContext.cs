@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SampleModel.Entity;
 
-namespace SampleModel
+namespace SampleModel.Services
 {
   public class SampleContext : DbContext
   {

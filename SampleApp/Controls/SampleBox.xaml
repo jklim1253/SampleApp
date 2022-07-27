@@ -14,7 +14,7 @@
     
   </UserControl.Resources>
   <UserControl.Style>
-    <Style TargetType="local:SampleBox">
+    <Style TargetType="{x:Type local:SampleBox}">
       <Setter Property="FocusVisualStyle">
         <Setter.Value>
           <Style>
@@ -35,18 +35,21 @@
       </Setter>
     </Style>
   </UserControl.Style>
-  <Border Background="Black"
+  <Border Background="#55000000"
           SnapsToDevicePixels="True"
           CornerRadius="8"
           BorderThickness="2"
-          BorderBrush="Green">
+          BorderBrush="#5500FF00">
     <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
-      <Border Background="Green"
-              CornerRadius="4 4 0 0"
+      <Border Background="#5500FF00"
+              SnapsToDevicePixels="True"
+              CornerRadius="6 6 0 0"
+              BorderThickness="2"
+              BorderBrush="#5500FF00"
               Padding="4"
               Margin="0"
               >

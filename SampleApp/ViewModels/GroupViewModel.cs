@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.Input;
 using SampleModel.DTO;
-using SampleModel.Entity;
-using SampleModel.Services;
+using SampleModel.DTOServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +16,7 @@ namespace SampleApp.ViewModels
     #region Fields
 
     private readonly ILogger<GroupViewModel> logger;
-    private readonly SampleDataService dbService;
+    private readonly SampleDTOService dtoService;
 
     #endregion
 
@@ -49,10 +48,10 @@ namespace SampleApp.ViewModels
 
     #endregion
 
-    public GroupViewModel(ILogger<GroupViewModel> logger, SampleDataService dbService)
+    public GroupViewModel(ILogger<GroupViewModel> logger, SampleDTOService dtoService)
     {
       this.logger = logger;
-      this.dbService = dbService;
+      this.dtoService = dtoService;
 
       Group = new GroupInfoDTO();
 
@@ -63,7 +62,7 @@ namespace SampleApp.ViewModels
 
     private async void OnSelect()
     {
-      Groups = await dbService.SelectGroupInfoDTOs();
+      Groups = await dtoService.SelectGroupInfoDTOs();
 
       Group = new GroupInfoDTO();
     }
@@ -74,7 +73,7 @@ namespace SampleApp.ViewModels
       {
         if (IsValidGroup())
         {
-          await dbService.InsertGroupInfoDTO(Group);
+          await dtoService.InsertGroupInfoDTO(Group);
           OnSelect();
         }
       }
@@ -82,7 +81,7 @@ namespace SampleApp.ViewModels
       {
         if (IsValidGroup())
         {
-          await dbService.UpdateGroupInfoDTO((int)Group.GroupId, Group);
+          await dtoService.UpdateGroupInfoDTO((int)Group.GroupId, Group);
         }
       }
     }
@@ -91,7 +90,7 @@ namespace SampleApp.ViewModels
     {
       if (Group.GroupId != null)
       {
-        await dbService.DeleteGroupInfoDTO((int)Group.GroupId);
+        await dtoService.DeleteGroupInfoDTO((int)Group.GroupId);
         OnSelect();
       }
     }

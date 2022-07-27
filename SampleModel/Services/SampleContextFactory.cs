@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleModel
+namespace SampleModel.Services
 {
   public class SampleContextFactory : IDesignTimeDbContextFactory<SampleContext>
   {

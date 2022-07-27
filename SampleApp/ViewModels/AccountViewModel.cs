@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.Input;
 using SampleModel.DTO;
-using SampleModel.Entity;
-using SampleModel.Services;
+using SampleModel.DTOServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +16,7 @@ namespace SampleApp.ViewModels
     #region Fields
 
     private readonly ILogger<AccountViewModel> logger;
-    private readonly SampleDataService dbService;
+    private readonly SampleDTOService dtoService;
 
     #endregion
 
@@ -57,10 +56,10 @@ namespace SampleApp.ViewModels
 
     #endregion
 
-    public AccountViewModel(ILogger<AccountViewModel> logger, SampleDataService dbService)
+    public AccountViewModel(ILogger<AccountViewModel> logger, SampleDTOService dtoService)
     {
       this.logger = logger;
-      this.dbService = dbService;
+      this.dtoService = dtoService;
 
       User = new UserInfoDTO();
 
@@ -73,9 +72,9 @@ namespace SampleApp.ViewModels
     {
       try
       {
-        Users = await dbService.SelectUserInfoDTOs();
+        Users = await dtoService.SelectUserInfoDTOs();
 
-        Groups = await dbService.SelectGroupInfoDTOs();
+        Groups = await dtoService.SelectGroupInfoDTOs();
 
         User = new UserInfoDTO();
       }
@@ -91,7 +90,7 @@ namespace SampleApp.ViewModels
       {
         if (IsValidUser())
         {
-          await dbService.InsertUserInfoDTO(User);
+          await dtoService.InsertUserInfoDTO(User);
 
           OnSelect();
         }
@@ -100,7 +99,7 @@ namespace SampleApp.ViewModels
       {
         if (IsValidUser())
         {
-          await dbService.UpdateUserInfoDTO((int)User.UserId, User);
+          await dtoService.UpdateUserInfoDTO((int)User.UserId, User);
         }
       }
     }
@@ -109,7 +108,7 @@ namespace SampleApp.ViewModels
     {
       if (User.UserId != null)
       {
-        await dbService.DeleteUserInfoDTO((int)User.UserId);
+        await dtoService.DeleteUserInfoDTO((int)User.UserId);
 
         OnSelect();
       }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SampleModel.DTOServices;
 using SampleModel.Services;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace SampleModel.Extensions
       {
         services.AddSingleton<SampleDataProvider>();
         services.AddSingleton<SampleDataService>();
+        services.AddSingleton<SampleDTOService>();
       });
     }
   }

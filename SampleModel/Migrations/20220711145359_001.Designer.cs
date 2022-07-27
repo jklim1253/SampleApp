@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SampleModel;
+using SampleModel.Services;
 
 #nullable disable
 
 namespace SampleModel.Migrations
 {
-    [DbContext(typeof(SampleContext))]
+  [DbContext(typeof(SampleContext))]
     [Migration("20220711145359_001")]
     partial class _001
     {

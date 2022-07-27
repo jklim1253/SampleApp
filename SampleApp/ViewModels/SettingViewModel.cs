@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.Input;
-using SampleModel;
 using SampleModel.Entity;
 using SampleModel.Services;
 using System;
