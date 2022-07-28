@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace SampleApp.ViewModels
 {
@@ -51,7 +52,7 @@ namespace SampleApp.ViewModels
 
     private void OnCapture(object? obj)
     {
-      var target = obj as Border;
+      var target = obj as Rectangle;
       if (target == null) return;
 
       if (target.CaptureMouse())
@@ -62,7 +63,7 @@ namespace SampleApp.ViewModels
     }
     private void OnRelease(object? obj)
     {
-      var target = obj as Border;
+      var target = obj as Rectangle;
       if (target == null) return;
 
       if (target.IsMouseCaptured)
@@ -73,7 +74,7 @@ namespace SampleApp.ViewModels
     }
     private void OnMove(object? obj)
     {
-      var target = obj as Border;
+      var target = obj as Rectangle;
       if (target == null) return;
 
       if (target.IsMouseCaptured)
@@ -85,7 +86,10 @@ namespace SampleApp.ViewModels
         posCurrent += diff;
 
         // origin is center of view.
-        target.RenderTransform = new TranslateTransform(posCurrent.X, posCurrent.Y);
+        //target.RenderTransform = new TranslateTransform(posCurrent.X, posCurrent.Y);
+
+        PosX = (posCurrent.X < 0)? 0 : posCurrent.X;
+        PosY = (posCurrent.Y < 0)? 0 : posCurrent.Y;
 
         ptMouse = ptCurrent;
       }

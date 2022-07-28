@@ -11,45 +11,69 @@
       Title="ArchitectureView">
 
   <Grid Style="{StaticResource MainView}">
-    <Border VerticalAlignment="Center"
-            HorizontalAlignment="Center">
-      <TextBlock Text="ArchitectureView"/>
-    </Border>
-    <Border Width="100"
-            Height="100"
-            Background="Green"
-            Cursor="Hand"
-            Name="Test"
-            >
-      <Border.Style>
-        <Style TargetType="{x:Type Border}">
-          <Style.Triggers>
-            <Trigger Property="IsMouseCaptured" Value="True">
-              <Setter Property="Cursor" Value="SizeAll"/>
-            </Trigger>
-          </Style.Triggers>
-        </Style>
-      </Border.Style>
-      <behaviors:Interaction.Triggers>
-        <behaviors:EventTrigger EventName="MouseDown">
-          <behaviors:InvokeCommandAction Command="{Binding CaptureCommand}"
-                                         CommandParameter="{Binding ElementName=Test}"/>
-        </behaviors:EventTrigger>
-        <behaviors:EventTrigger EventName="MouseUp">
-          <behaviors:InvokeCommandAction Command="{Binding ReleaseCommand}"
-                                         CommandParameter="{Binding ElementName=Test}"/>
-        </behaviors:EventTrigger>
-        <behaviors:EventTrigger EventName="MouseMove">
-          <behaviors:InvokeCommandAction Command="{Binding MoveCommand}"
-                                         CommandParameter="{Binding ElementName=Test}"/>
-        </behaviors:EventTrigger>
-      </behaviors:Interaction.Triggers>
-      <Border.RenderTransform>
-        <TranslateTransform X="{Binding PosX}" Y="{Binding PosY}"/>
-      </Border.RenderTransform>
-      <TextBlock Text="Server"
-                 VerticalAlignment="Center"
-                 HorizontalAlignment="Center"/>
-    </Border>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Left">
+      <TextBox Text="Name"
+               Width="100"
+               Style="{StaticResource BaseInput}"/>
+      <ComboBox Width="150"
+                Height="{StaticResource BaseHeight}"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                >
+        <ComboBoxItem Content="Service"/>
+        <ComboBoxItem Content="ServerManager"/>
+        <ComboBoxItem Content="ServerInstance"/>
+      </ComboBox>
+      <Button Content="Add"
+              Style="{StaticResource NormalButton}"/>
+      <Button Content="Remove"
+              Style="{StaticResource NormalButton}"/>
+    </StackPanel>
+    <Canvas Grid.Row="1">
+      <Rectangle Width="100"
+                 Height="100"
+                 Fill="Aqua"
+                 Cursor="Hand"
+                 Name="Service">
+        <Rectangle.Style>
+          <Style TargetType="{x:Type Rectangle}">
+            <Style.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Stroke" Value="Red"/>
+                <Setter Property="StrokeDashArray" Value="2 2"/>
+                <Setter Property="StrokeThickness" Value="2"/>
+              </Trigger>
+              <Trigger Property="IsMouseCaptured" Value="True">
+                <Setter Property="Stroke" Value="Green"/>
+                <Setter Property="StrokeDashArray" Value="2 0"/>
+                <Setter Property="StrokeThickness" Value="2"/>
+              </Trigger>
+            </Style.Triggers>
+          </Style>
+        </Rectangle.Style>
+        <behaviors:Interaction.Triggers>
+          <behaviors:EventTrigger EventName="MouseDown">
+            <behaviors:InvokeCommandAction Command="{Binding CaptureCommand}"
+                                           CommandParameter="{Binding ElementName=Service}"/>
+          </behaviors:EventTrigger>
+          <behaviors:EventTrigger EventName="MouseUp">
+            <behaviors:InvokeCommandAction Command="{Binding ReleaseCommand}"
+                                           CommandParameter="{Binding ElementName=Service}"/>
+          </behaviors:EventTrigger>
+          <behaviors:EventTrigger EventName="MouseMove">
+            <behaviors:InvokeCommandAction Command="{Binding MoveCommand}"
+                                           CommandParameter="{Binding ElementName=Service}"/>
+          </behaviors:EventTrigger>
+        </behaviors:Interaction.Triggers>
+        <Rectangle.RenderTransform>
+          <TranslateTransform X="{Binding PosX, Mode=TwoWay}" Y="{Binding PosY, Mode=TwoWay}"/>
+        </Rectangle.RenderTransform>
+      </Rectangle>
+    </Canvas>
   </Grid>
 </Page>

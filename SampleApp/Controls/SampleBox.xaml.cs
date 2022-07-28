@@ -52,5 +52,19 @@ namespace SampleApp.Controls
         DependencyProperty.Register("URL", typeof(string), typeof(SampleBox), new PropertyMetadata(string.Empty));
 
 
+
+
+
+    public SampleBoxInfo Info
+    {
+      get { return (SampleBoxInfo)GetValue(infoProperty); }
+      set { SetValue(infoProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for sampleBoxInfo.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty infoProperty =
+        DependencyProperty.Register("Info", typeof(SampleBoxInfo), typeof(SampleBox), new PropertyMetadata(new SampleBoxInfo()));
+
+
   }
 }

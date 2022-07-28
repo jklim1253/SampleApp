@@ -61,7 +61,9 @@
             <DataTemplate DataType="{x:Type controls:SampleBoxInfo}">
               <Border Padding="4"
                       Focusable="True">
-                <controls:SampleBox Id="{Binding Path=Id}" URL="{Binding Path=URL}" />
+                <!--<controls:SampleBox Info="{Binding Path=}" />-->
+                <controls:SampleBox Id="{Binding Path=Id}"
+                                    URL="{Binding Path=URL}"/>
               </Border>
             </DataTemplate>
           </ItemsControl.ItemTemplate>

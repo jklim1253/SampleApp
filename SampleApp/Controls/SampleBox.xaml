@@ -6,50 +6,41 @@
              xmlns:local="clr-namespace:SampleApp.Controls"
              mc:Ignorable="d"
              Background="Transparent"
+             BorderThickness="0"
              MinHeight="170"
              MinWidth="200"
              AllowDrop="True"
              d:DesignHeight="100" d:DesignWidth="100">
   <UserControl.Resources>
-    
-  </UserControl.Resources>
-  <UserControl.Style>
     <Style TargetType="{x:Type local:SampleBox}">
-      <Setter Property="FocusVisualStyle">
-        <Setter.Value>
-          <Style>
-            <Setter Property="Control.Template">
-              <Setter.Value>
-                <ControlTemplate>
-                  <Border>
-                    <Rectangle Margin="2"
-                         StrokeThickness="1"
-                         Stroke="Orange"
-                         StrokeDashArray="1 2"/>
-                  </Border>
-                </ControlTemplate>
-              </Setter.Value>
-            </Setter>
-          </Style>
-        </Setter.Value>
-      </Setter>
+      <Style.Resources>
+        <Style TargetType="{x:Type Border}">
+          <Setter Property="BorderBrush" Value="#5500FF00"/>
+          <Setter Property="Background" Value="#5500FF00"/>
+        </Style>
+      </Style.Resources>
     </Style>
-  </UserControl.Style>
-  <Border Background="#55000000"
-          SnapsToDevicePixels="True"
+  </UserControl.Resources>
+  <Border SnapsToDevicePixels="True"
           CornerRadius="8"
-          BorderThickness="2"
-          BorderBrush="#5500FF00">
+          BorderThickness="2">
+    <Border.Style>
+      <Style TargetType="{x:Type Border}" BasedOn="{StaticResource {x:Type Border}}">
+        <Style.Triggers>
+          <Trigger Property="IsMouseOver" Value="True">
+            <Setter Property="BorderBrush" Value="Red"/>
+          </Trigger>
+        </Style.Triggers>
+      </Style>
+    </Border.Style>
     <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
-      <Border Background="#5500FF00"
-              SnapsToDevicePixels="True"
+      <Border SnapsToDevicePixels="True"
               CornerRadius="6 6 0 0"
               BorderThickness="2"
-              BorderBrush="#5500FF00"
               Padding="4"
               Margin="0"
               >
@@ -58,7 +49,10 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"/>
       </Border>
-      <Border Grid.Row="1">
+      <Border Grid.Row="1"
+              CornerRadius="0 0 6 6"
+              BorderThickness="0"
+              Background="#55000000">
         <TextBlock Text="{Binding URL}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"/>
